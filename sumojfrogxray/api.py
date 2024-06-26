@@ -244,9 +244,9 @@ class ViolationsLogsAPI(FetchPaginatedDataBasedOnOffset):
 
     def transform_artifact_data(self, violation_url, artifact_path, violation_object):
         if violation_url is not None:
-            comp_id = re.search('comp_id=(.*)&issue_id=', violation_url)
+            comp_id = re.search('issue_id=(.*)&comp_id=(.*)', violation_url)
             if comp_id:
-                comp_id = comp_id.group(1).replace("%3A", ",").replace("%2F", ",")
+                comp_id = comp_id.group(2).replace("%3A", ",").replace("%2F", ",")
                 comp_id = re.sub(',+', ',', comp_id)
 
                 values = comp_id.split(",")
